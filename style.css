@@ -247,10 +247,6 @@ h1 {
 }
 
 @media (max-width: 480px) {
-    main {
-        background: url('./assets/mobile-background.png') no-repeat center center fixed;
-    }
-
     .hero-content {
         padding: 1.5rem;
         text-align: center;
@@ -265,7 +261,7 @@ h1 {
     }
 
     .small {
-        font-size: 0.7rem;
+        font-size: 0.85rem;
     }
 
     .event-date-text {
@@ -287,6 +283,10 @@ h1 {
 
     .session-title {
         font-size: 1rem;
+    }
+
+    .session-title-normal {
+        font-size: 0.95rem;
     }
 
     .session-number {
