@@ -68,7 +68,7 @@ h1 {
     display: inline-block;
 }
 
-.slogan .small {
+.small {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.7);
 }
@@ -247,6 +247,10 @@ h1 {
 }
 
 @media (max-width: 480px) {
+    main {
+        background: url('./assets/mobile-background.png') no-repeat center center fixed;
+    }
+
     .hero-content {
         padding: 1.5rem;
         text-align: center;
@@ -260,8 +264,8 @@ h1 {
         font-size: 1.0rem;
     }
 
-    .slogan .small {
-        font-size: 0.8rem;
+    .small {
+        font-size: 0.7rem;
     }
 
     .event-date-text {
