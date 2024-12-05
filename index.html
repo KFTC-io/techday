@@ -7,269 +7,274 @@
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
-        :root {
-            --primary-color: #4a90e2;
-            --secondary-color: #34495e;
-            --accent-color: #e74c3c;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
             font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
             line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #0a0a1f;
             color: #ffffff;
-            overflow-x: hidden;
+            background: url('./assets/background.png') no-repeat center center fixed;
+            background-size: cover;
         }
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
-        }
-        header {
+
+        .hero {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
-            background-size: cover;
+            text-align: center;
             position: relative;
+            perspective: 1000px;
         }
-        header::before {
+
+        .hero-content {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            transform: translateZ(50px);
+        }
+
+        .slogan {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            transform: translateZ(30px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .schedule {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            margin-top: 2rem;
+        }
+
+        .schedule-item {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-item::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.5);
-        }
-        header h1 {
-            font-size: 4em;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            animation: fadeInUp 1s ease-out;
-        }
-        .info, .schedule {
-            background: rgba(255,255,255,0.1);
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        .info:hover, .schedule:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .schedule h2 {
-            color: var(--primary-color);
-            text-align: center;
-        }
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0 10px;
-        }
-        th, td {
-            padding: 15px;
-            text-align: left;
-            background: rgba(255,255,255,0.05);
-            transition: all 0.3s ease;
-        }
-        th {
-            background-color: var(--primary-color);
-            color: #ffffff;
-        }
-        tr {
-            transition: all 0.3s ease;
-        }
-        tr:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(74,144,226,0.2);
-            cursor: pointer;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.8);
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            transition: 0.5s;
         }
-        .modal-content {
-            background-color: #1a1a3a;
-            margin: 15% auto;
-            padding: 20px;
-            border-radius: 10px;
-            width: 70%;
-            max-width: 600px;
-            animation: fadeIn 0.3s;
+
+        .schedule-item:hover::before {
+            left: 100%;
         }
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+
+        .schedule-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
-        .close:hover {
-            color: #fff;
+
+        .time {
+            font-weight: 600;
+            color: #00f2fe;
         }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+
+        .session-title {
+            font-weight: 500;
+        }
+
+        .speaker {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+        }
+
+        .break {
+            background: rgba(0, 242, 254, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .slogan {
+                font-size: 1.3rem;
             }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
+            .schedule-item {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="particles-js" class="particles"></div>
-    
-    <header>
-        <div class="container">
+    <section class="hero">
+        <div class="hero-content">
             <h1>KFTC 테크데이 2024</h1>
+            <p class="slogan">1st KFTC Tech Day : 협업과 혁신으로 여는 가능성의 문</p>
         </div>
-    </header>
+    </section>
 
     <div class="container">
-        <section class="info">
-            <h2>행사 정보</h2>
-            <p><strong>일시:</strong> 2024년 5월 15일 (수요일)</p>
-            <p><strong>장소:</strong> KFTC 컨퍼런스 센터, 서울특별시 강남구 테헤란로 123</p>
-            <p><strong>주제:</strong> 금융 기술의 미래: 혁신과 보안의 균형</p>
-        </section>
+        <div class="schedule">
+            <div class="schedule-item">
+                <div class="time">09:00 - 09:20</div>
+                <div class="session">
+                    <div class="session-title">등록</div>
+                </div>
+            </div>
 
-        <section class="schedule">
-            <h2>행사 일정</h2>
-            <table id="scheduleTable">
-                <tr>
-                    <th>시간</th>
-                    <th>세션</th>
-                    <th>발표자</th>
-                </tr>
-                <tr data-description="환영사 및 행사 소개">
-                    <td>09:00 - 09:30</td>
-                    <td>등록 및 환영</td>
-                    <td>-</td>
-                </tr>
-                <tr data-description="금융 기술의 현재 동향과 미래 전망에 대한 통찰력 있는 발표">
-                    <td>09:30 - 10:30</td>
-                    <td>기조연설: 금융 기술의 현재와 미래</td>
-                    <td>김철수 CTO, KFTC</td>
-                </tr>
-                <tr data-description="블록체인 기술이 금융 보안에 미치는 영향과 적용 사례 소개">
-                    <td>10:45 - 11:45</td>
-                    <td>블록체인 기술과 금융 보안</td>
-                    <td>박영희 박사, 핀테크 연구소</td>
-                </tr>
-                <tr data-description="네트워킹 및 휴식 시간">
-                    <td>12:00 - 13:00</td>
-                    <td>점심 식사</td>
-                    <td>-</td>
-                </tr>
-                <tr data-description="AI 기술을 활용한 혁신적인 금융 서비스 사례 및 미래 전망">
-                    <td>13:15 - 14:15</td>
-                    <td>AI를 활용한 금융 서비스 혁신</td>
-                    <td>이민준 교수, 서울대학교</td>
-                </tr>
-                <tr data-description="오픈뱅킹 API의 현황과 개발자 생태계 활성화 방안">
-                    <td>14:30 - 15:30</td>
-                    <td>오픈뱅킹 API와 개발자 생태계</td>
-                    <td>정다영 팀장, KFTC</td>
-                </tr>
-                <tr data-description="금융 기술 발전에 따른 윤리적 문제와 해결 방안 논의">
-                    <td>15:45 - 16:45</td>
-                    <td>패널 토론: 금융 기술의 윤리적 과제</td>
-                    <td>다양한 전문가 패널</td>
-                </tr>
-                <tr data-description="행사 마무리 및 향후 계획 안내">
-                    <td>16:45 - 17:00</td>
-                    <td>폐회사</td>
-                    <td>KFTC 대표이사</td>
-                </tr>
-            </table>
-        </section>
-    </div>
+            <div class="schedule-item">
+                <div class="time">09:20 - 09:50</div>
+                <div class="session">
+                    <div class="session-title">키노트</div>
+                    <div class="speaker">CIO, 플랫폼개발부장</div>
+                </div>
+            </div>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalDescription"></p>
+            <div class="schedule-item">
+                <div class="time">10:00 - 10:40</div>
+                <div class="session">
+                    <div class="session-title">세션 1 - KFTC 개발자 경험과 문화 톺아보기</div>
+                    <div class="speaker">IT플랫폼기획팀장</div>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">10:50 - 11:30</div>
+                <div class="session">
+                    <div class="session-title">세션 2 - 차세대 IT아키텍처 전환 사례</div>
+                    <div class="speaker">금융공동망재구축반장, 신기술인프라반장</div>
+                </div>
+            </div>
+
+            <div class="schedule-item break">
+                <div class="time">11:30 - 13:20</div>
+                <div class="session">
+                    <div class="session-title">점심 시간</div>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">13:20 - 14:00</div>
+                <div class="session">
+                    <div class="session-title">세션 3</div>
+                    <div class="speaker">내용 미정</div>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">14:10 - 14:50</div>
+                <div class="session">
+                    <div class="session-title">세션 4 - 시스템 장애, 다른 시선으로 접근해보기</div>
+                    <div class="speaker">IT기획팀장, IT플랫폼기획팀장, 결제개발팀장</div>
+                </div>
+            </div>
+
+            <div class="schedule-item break">
+                <div class="time">14:50 - 15:10</div>
+                <div class="session">
+                    <div class="session-title">커피 브레이크</div>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">15:10 - 15:50</div>
+                <div class="session">
+                    <div class="session-title">세션 5 - 카카오뱅크의 개발자경험</div>
+                    <div class="speaker">카카오뱅크 기술XR팀장</div>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">16:00 - 16:40</div>
+                <div class="session">
+                    <div class="session-title">세션 6 - 오픈 프로그래밍으로 봇 개발하기 & IT 101 프로젝트 재조명</div>
+                    <div class="speaker">네트워크팀장, 정보개발팀원</div>
+                </div>
+            </div>
+
+            <div class="schedule-item">
+                <div class="time">16:40 - 17:00</div>
+                <div class="session">
+                    <div class="session-title">폐막 및 경품추첨</div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#ffffff" },
-                shape: { type: "circle" },
-                opacity: { value: 0.5, random: false },
-                size: { value: 3, random: true },
-                line_linked: { enable: true, distance: 150, color: "#ffffff", opacity: 0.4, width: 1 },
-                move: { enable: true, speed: 6, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-            },
-            retina_detect: true
-        });
-
-        const modal = document.getElementById("myModal");
-        const span = document.getElementsByClassName("close")[0];
-        const modalTitle = document.getElementById("modalTitle");
-        const modalDescription = document.getElementById("modalDescription");
-
-        document.getElementById("scheduleTable").addEventListener("click", function(e) {
-            if (e.target.tagName === "TD") {
-                const row = e.target.parentElement;
-                const title = row.cells[1].innerText;
-                const description = row.getAttribute("data-description");
-                modalTitle.innerText = title;
-                modalDescription.innerText = description;
-                modal.style.display = "block";
-            }
-        });
-
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const heroContent = document.querySelector('.hero-content');
+        
+        document.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            const { innerWidth, innerHeight } = window;
+            
+            const xRotation = (clientY - innerHeight / 2) / 30;
+            const yRotation = (clientX - innerWidth / 2) / -30;
+            
+            heroContent.style.transform = `
+                rotateX(${xRotation}deg)
+                rotateY(${yRotation}deg)
+            `;
+        });
+
+        // 스케줄 아이템 클릭 효과
+        const scheduleItems = document.querySelectorAll('.schedule-item');
+        scheduleItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.transform = 'scale(1.02)';
+                setTimeout(() => {
+                    item.style.transform = 'translateX(10px)';
+                }, 200);
+            });
+        });
+
+        // 스크롤 애니메이션
+        const scheduleSection = document.querySelector('.schedule');
+        window.addEventListener('scroll', () => {
+            const sectionPosition = scheduleSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight;
+
+            if(sectionPosition < screenPosition) {
+                scheduleSection.style.opacity = '1';
+                scheduleSection.style.transform = 'translateY(0)';
+            }
+        });
+    });
+</script>
 </html>
