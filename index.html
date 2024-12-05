@@ -11,331 +11,27 @@
     <meta property="og:image" content="https://kftc-io.github.io/techday/assets/thumbnail.png">
     <title>KFTC 테크데이 2024</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        body {
-            background: rgba(0, 0, 0, 0.9);
-            font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-            line-height: 1.6;
-            color: #ffffff;
-        }
-
-        main {
-            background: url('./assets/background.png') no-repeat center center fixed;
-            background-size: cover;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-content {
-            background: rgba(0, 0, 0, 0.8);
-            padding: 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            width: 100%;
-            max-width: 500px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        .hero-title {
-            background: linear-gradient(45deg, #FF6B6B, #9C27B0, #00BCD4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 200% auto;
-            animation: gradient 3s linear infinite;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            word-break: keep-all;
-        }
-
-        .slogan {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            word-break: keep-all;
-            position: relative;
-            display: inline-block;
-        }
-
-        .slogan::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: linear-gradient(90deg, #FF6B6B, #00BCD4);
-            animation: lineWidth 1s ease forwards 1s;
-        }
-
-        .container {
-            width: 100%;
-            padding: 1rem;
-            margin: 0 auto;
-        }
-
-        .schedule {
-            background: rgba(0, 0, 0, 0.8);
-            border-radius: 15px;
-            padding: 1.5rem;
-            backdrop-filter: blur(10px);
-            margin-top: 2rem;
-        }
-
-        .schedule-item {
-            display: flex;
-            flex-direction: column;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .schedule-item.multi-session {
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .schedule-item.multi-session hr {
-            border: none;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            margin: 1rem 0;
-        }
-
-        .schedule-item.break {
-            background-color: rgba(0, 242, 254, 0.1);
-        }
-
-        .time {
-            font-weight: bold;
-            color: #00f2fe;
-            margin-bottom: 0.5rem;
-        }
-
-        .session {
-            margin-bottom: 0.5rem;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .session-number {
-            font-size: 1rem;
-            font-weight: bold;
-            color: #ff6b6b;
-        }
-
-        .session-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #ffffff;
-            margin-bottom: 0.3rem;
-        }
-
-        .speaker {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 0.5rem;
-        }
-
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-
-        .tags {
-            font-size: 0.75rem;
-            padding: 0.1rem 0.4rem;
-            color: #ffffff;
-            font-weight: 500;
-            border-radius: 4px;
-        }
-
-        .tag-blue { background-color: #4A6FA5; }
-        .tag-green { background-color: #4A9F7E; }
-        .tag-purple { background-color: #8E4A8C; }
-        .tag-orange { background-color: #C17B4D; }
-        .tag-teal { background-color: #4A8C8E; }
-        .tag-red { background-color: #A54A4A; }
-        .tag-violet { background-color: #6A4A8C; }
-        .tag-brown { background-color: #8B4513; }
-
-
-        /* 스크롤바 스타일링 */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes lineWidth {
-            to { width: 100%; }
-        }
-
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .footer {
-            color: rgba(255, 255, 255, 0.6);
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .sub-slogan {
-            font-size: 1rem;
-            font-weight: 300;
-            word-break: keep-all;
-        }
-
-        .event-date-container {
-            text-align: center;
-            margin: 0.5rem auto;
-        }
-
-        .event-date-text {
-            font-size: 1rem;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.8);
-            padding: 0.5rem 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
-            display: inline-block;
-        }
-
-        /* 모바일 최적화 */
-        @media (max-width: 480px) {
-            .hero-content {
-                padding: 1.5rem;
-                text-align: center;
-            }
-
-            h1.hero-title {
-                font-size: 2rem;
-            }
-
-            .slogan {
-                font-size: 1.1rem;
-            }
-
-            .event-date {
-                font-size: 0.9rem;
-                margin-top: 0.5rem;
-            }
-
-            .schedule-item {
-                padding: 1rem;
-            }
-
-            .time {
-                font-size: 0.9rem;
-            }
-
-            .session-title {
-                font-size: 1rem;
-            }
-
-            .session-number {
-                font-size: 0.9rem;
-            }
-
-            .speaker {
-                font-size: 0.8rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .tags-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 0.3rem;
-                margin-top: 0.5rem;
-            }
-
-            .tags {
-                font-size: 0.7rem;
-                padding: 0.1rem 0.3rem;
-            }
-
-            .footer {
-                padding: 1rem;
-                font-size: 0.8rem;
-                text-align: center;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <main>
         <div class="hero">
-            <div id="particles" class="particles"></div>
             <div class="hero-content">
                 <h1 class="hero-title">KFTC 테크데이 2024</h1>
-                <p class="slogan">1st KFTC Tech Day : 협업과 혁신으로 여는 가능성의 문</p>
+                <p class="slogan"><small class="small">1st KFTC Tech Day :</small> 협업과 혁신으로 여는 가능성의 문</p>
                 <div class="event-date-container">
-                    <p class="event-date-text">📅&nbsp;&nbsp;December 13th&nbsp;&nbsp;|&nbsp;&nbsp;⏰&nbsp;&nbsp;09:00 ~ 17:00</p>
+                    <p class="event-date-text">📅&nbsp;&nbsp;December 13th&nbsp;&nbsp;|&nbsp;&nbsp;⏰&nbsp;&nbsp;09:00 - 17:00</p>
                 </div>
+                <p class="event-date-text">📍&nbsp;&nbsp;금융결제원 분당센터 2층</p>
+            </div>
+
+            <div class="scroll-button-container">
+                <button id="scrollButton" class="scroll-button" aria-label="일정 보기">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 13l5 5 5-5"/>
+                        <path d="M7 6l5 5 5-5"/>
+                    </svg>
+                </button>
             </div>
         </div>
         
@@ -447,8 +143,8 @@
                     <div class="time">14:10 - 14:50</div>
                     <div class="session">
                         <span class="session-number">세션 4</span>
-                        <span class="session-title">시스템 장애, 다른 시선으로 접근해보기 (패널토론)</span>
-                        <div class="speaker">IT기획팀 과장 최충배, IT플랫폼기획팀 부부장 윤상문, 결제개발팀 부부장 유광열, 통합관제기획팀 차장 정승훈 (사회: IT플랫폼기획팀장 김순일)</div>
+                        <span class="session-title">시스템 장애, 다른 시선으로 접근해보기 <span class="session-title-normal">(패널토론)</span></span>
+                        <div class="speaker">패널 : IT기획팀 과장 최충배, IT플랫폼기획팀 부부장 윤상문, 결제개발팀 부부장 유광열, 통합관제기획팀 차장 정승훈 / 사회 : IT플랫폼기획팀장 김순일</div>
                         <div class="tags-container">
                             <span class="tags tag-orange">DEX</span>
                             <span class="tags tag-green">DEVOPS</span>
@@ -469,7 +165,7 @@
                     <div class="time">15:10 - 15:50</div>
                     <div class="session">
                         <span class="session-number">세션 5</span>
-                        <span class="session-title">우리는 이렇게 하고 있어요 (카카오뱅크의 DevRel, 개발자 경험/문화)</span>
+                        <span class="session-title">우리는 이렇게 하고 있어요 <span class="session-title-normal">(카카오뱅크의 DevRel, 개발자 경험/문화)</span></span>
                         <div class="speaker">카카오뱅크 기술XR팀 Celina</div>
                         <div class="tags-container">
                             <span class="tags tag-orange">DEX</span>
@@ -483,7 +179,7 @@
                     <div class="time">16:00 - 16:40</div>
                     <div class="session">
                         <span class="session-number">세션 6A</span>
-                        <span class="session-title">오픈 프로그래밍으로 봇 개발하기 (Alfred, 네트워크팀 봇, 로사 금결이)</span>
+                        <span class="session-title">오픈 프로그래밍으로 봇 개발하기 <span class="session-title-normal">(Alfred, 네트워크팀 봇, 로사 금결이)</span></span>
                         <div class="speaker">IT플랫폼기획팀 부부장 윤상문, 네트워크팀 부부장 유종선, IT협업팀 과장 홍광의</div>
                         <div class="tags-container">
                             <span class="tags tag-blue">DEV</span>
@@ -494,7 +190,7 @@
                     <hr />
                     <div class="session">
                         <span class="session-number">세션 6B</span>
-                        <span class="session-title">IT 101 프로젝트 재조명 ('23. KFTC-114, '24. 업무 일시중단 관리 플랫폼)</span>
+                        <span class="session-title">IT 101 프로젝트 재조명 <span class="session-title-normal">('23. KFTC-114, '24. 업무 일시중단 관리 플랫폼)</span></span>
                         <div class="speaker">시스템지원팀 계장 서지원, 정보개발팀 계장 문봉오</div>
                         <div class="tags-container">
                             <span class="tags tag-blue">DEV</span>
@@ -507,34 +203,23 @@
                 <div class="schedule-item break">
                     <div class="time">16:40 - 17:00</div>
                     <div class="session">
-                        <div class="session-title">폐막, 경품추첨 및 기념촬영</div>
+                        <div class="session-title">폐막, Lucky Gift 🎁</div>
                     </div>
                 </div>
             </div>
         </div>
         
     </main>
-
-    <footer class="footer">
-        <p class="sub-slogan">DevRel, 개발자 경험/문화와 차세대 기술을 협업으로 혁신하다.</p>
-    </footer>
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // 스케줄 아이템 터치 효과
         const scheduleItems = document.querySelectorAll('.schedule-item');
         
         scheduleItems.forEach(item => {
-            item.addEventListener('touchstart', () => {
-                item.style.transform = 'scale(0.98)';
-            });
-            
-            item.addEventListener('touchend', () => {
-                item.style.transform = 'scale(1)';
-            });
+            item.addEventListener('touchstart', () => item.style.transform = 'scale(0.98)');
+            item.addEventListener('touchend', () => item.style.transform = 'scale(1)');
         });
 
-        // 스크롤 애니메이션
         const scheduleSection = document.querySelector('.schedule');
         const observer = new IntersectionObserver(
             (entries) => {
@@ -549,6 +234,12 @@
         );
 
         observer.observe(scheduleSection);
+
+        document.getElementById('scrollButton').addEventListener('click', function() {
+            document.querySelector('.container').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
 </script>
 </html>
