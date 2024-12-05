@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/favicon.ico">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kftc-io.github.io/techday">
+    <meta property="og:title" content="KFTC 테크데이 2024">
+    <meta property="og:description" content="1st KFTC Tech Day : 협업과 혁신으로 여는 가능성의 문">
+    <meta property="og:image" content="https://kftc-io.github.io/techday/assets/thumbnail.png">
     <title>KFTC 테크데이 2024</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
         
@@ -11,270 +18,537 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
+            background: rgba(0, 0, 0, 0.9);
             font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
             line-height: 1.6;
             color: #ffffff;
+        }
+
+        main {
             background: url('./assets/background.png') no-repeat center center fixed;
             background-size: cover;
         }
 
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 1rem;
             position: relative;
-            perspective: 1000px;
+            overflow: hidden;
         }
 
         .hero-content {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 3rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
             border-radius: 20px;
             backdrop-filter: blur(10px);
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
+            width: 100%;
+            max-width: 500px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-title {
+            background: linear-gradient(45deg, #FF6B6B, #9C27B0, #00BCD4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradient 3s linear infinite;
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             font-weight: 700;
-            transform: translateZ(50px);
+            word-break: keep-all;
         }
 
         .slogan {
-            font-size: 1.8rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
             font-weight: 300;
-            transform: translateZ(30px);
+            word-break: keep-all;
+            position: relative;
+            display: inline-block;
+        }
+
+        .slogan::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: linear-gradient(90deg, #FF6B6B, #00BCD4);
+            animation: lineWidth 1s ease forwards 1s;
         }
 
         .container {
-            max-width: 1200px;
+            width: 100%;
+            padding: 1rem;
             margin: 0 auto;
-            padding: 4rem 2rem;
         }
 
         .schedule {
             background: rgba(0, 0, 0, 0.8);
             border-radius: 15px;
-            padding: 2rem;
+            padding: 1.5rem;
             backdrop-filter: blur(10px);
             margin-top: 2rem;
         }
 
         .schedule-item {
-            display: grid;
-            grid-template-columns: 150px 1fr;
-            gap: 1rem;
-            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            padding: 1.25rem;
             margin-bottom: 1rem;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
 
-        .schedule-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                120deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
-            transition: 0.5s;
+        .schedule-item.multi-session {
+            background: rgba(255, 255, 255, 0.08);
         }
 
-        .schedule-item:hover::before {
-            left: 100%;
+        .schedule-item.multi-session hr {
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 1rem 0;
         }
 
-        .schedule-item:hover {
-            transform: translateX(10px);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        .schedule-item.break {
+            background-color: rgba(0, 242, 254, 0.1);
         }
 
         .time {
-            font-weight: 600;
+            font-weight: bold;
             color: #00f2fe;
+            margin-bottom: 0.5rem;
+        }
+
+        .session {
+            margin-bottom: 0.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .session-number {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #ff6b6b;
         }
 
         .session-title {
-            font-weight: 500;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 0.3rem;
         }
 
         .speaker {
             font-size: 0.9rem;
             color: rgba(255, 255, 255, 0.7);
-            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        .break {
-            background: rgba(0, 242, 254, 0.1);
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
+        .tags {
+            font-size: 0.75rem;
+            padding: 0.1rem 0.4rem;
+            color: #ffffff;
+            font-weight: 500;
+            border-radius: 4px;
+        }
+
+        .tag-blue { background-color: #4A6FA5; }
+        .tag-green { background-color: #4A9F7E; }
+        .tag-purple { background-color: #8E4A8C; }
+        .tag-orange { background-color: #C17B4D; }
+        .tag-teal { background-color: #4A8C8E; }
+        .tag-red { background-color: #A54A4A; }
+        .tag-violet { background-color: #6A4A8C; }
+        .tag-brown { background-color: #8B4513; }
+
+
+        /* 스크롤바 스타일링 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
             }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes lineWidth {
+            to { width: 100%; }
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .footer {
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .sub-slogan {
+            font-size: 1rem;
+            font-weight: 300;
+            word-break: keep-all;
+        }
+
+        .event-date-container {
+            text-align: center;
+            margin: 0.5rem auto;
+        }
+
+        .event-date-text {
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 1.5rem;
+                text-align: center;
+            }
+
+            h1.hero-title {
+                font-size: 2rem;
+            }
+
             .slogan {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
+
+            .event-date {
+                font-size: 0.9rem;
+                margin-top: 0.5rem;
+            }
+
             .schedule-item {
-                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .time {
+                font-size: 0.9rem;
+            }
+
+            .session-title {
+                font-size: 1rem;
+            }
+
+            .session-number {
+                font-size: 0.9rem;
+            }
+
+            .speaker {
+                font-size: 0.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .tags-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.3rem;
+                margin-top: 0.5rem;
+            }
+
+            .tags {
+                font-size: 0.7rem;
+                padding: 0.1rem 0.3rem;
+            }
+
+            .footer {
+                padding: 1rem;
+                font-size: 0.8rem;
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <h1>KFTC 테크데이 2024</h1>
-            <p class="slogan">1st KFTC Tech Day : 협업과 혁신으로 여는 가능성의 문</p>
-        </div>
-    </section>
-
-    <div class="container">
-        <div class="schedule">
-            <div class="schedule-item">
-                <div class="time">09:00 - 09:20</div>
-                <div class="session">
-                    <div class="session-title">등록</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">09:20 - 09:50</div>
-                <div class="session">
-                    <div class="session-title">키노트</div>
-                    <div class="speaker">CIO, 플랫폼개발부장</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">10:00 - 10:40</div>
-                <div class="session">
-                    <div class="session-title">세션 1 - KFTC 개발자 경험과 문화 톺아보기</div>
-                    <div class="speaker">IT플랫폼기획팀장</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">10:50 - 11:30</div>
-                <div class="session">
-                    <div class="session-title">세션 2 - 차세대 IT아키텍처 전환 사례</div>
-                    <div class="speaker">금융공동망재구축반장, 신기술인프라반장</div>
-                </div>
-            </div>
-
-            <div class="schedule-item break">
-                <div class="time">11:30 - 13:20</div>
-                <div class="session">
-                    <div class="session-title">점심 시간</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">13:20 - 14:00</div>
-                <div class="session">
-                    <div class="session-title">세션 3</div>
-                    <div class="speaker">내용 미정</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">14:10 - 14:50</div>
-                <div class="session">
-                    <div class="session-title">세션 4 - 시스템 장애, 다른 시선으로 접근해보기</div>
-                    <div class="speaker">IT기획팀장, IT플랫폼기획팀장, 결제개발팀장</div>
-                </div>
-            </div>
-
-            <div class="schedule-item break">
-                <div class="time">14:50 - 15:10</div>
-                <div class="session">
-                    <div class="session-title">커피 브레이크</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">15:10 - 15:50</div>
-                <div class="session">
-                    <div class="session-title">세션 5 - 카카오뱅크의 개발자경험</div>
-                    <div class="speaker">카카오뱅크 기술XR팀장</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">16:00 - 16:40</div>
-                <div class="session">
-                    <div class="session-title">세션 6 - 오픈 프로그래밍으로 봇 개발하기 & IT 101 프로젝트 재조명</div>
-                    <div class="speaker">네트워크팀장, 정보개발팀원</div>
-                </div>
-            </div>
-
-            <div class="schedule-item">
-                <div class="time">16:40 - 17:00</div>
-                <div class="session">
-                    <div class="session-title">폐막 및 경품추첨</div>
+    <main>
+        <div class="hero">
+            <div id="particles" class="particles"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">KFTC 테크데이 2024</h1>
+                <p class="slogan">1st KFTC Tech Day : 협업과 혁신으로 여는 가능성의 문</p>
+                <div class="event-date-container">
+                    <p class="event-date-text">📅&nbsp;&nbsp;December 13th&nbsp;&nbsp;|&nbsp;&nbsp;⏰&nbsp;&nbsp;09:00 ~ 17:00</p>
                 </div>
             </div>
         </div>
-    </div>
+        
+        <div class="container">
+            <div class="schedule">
+                <!-- 등록 -->
+                <div class="schedule-item break">
+                    <div class="time">09:00 - 09:20</div>
+                    <div class="session">
+                        <div class="session-title">행사 등록 및 준비, 참석자 네트워킹</div>
+                    </div>
+                </div>
+
+                <!-- 키노트 -->
+                <div class="schedule-item multi-session">
+                    <div class="time">09:20 - 09:50</div>
+                    <div class="session">
+                        <span class="session-number">키노트 1</span>
+                        <span class="session-title">가능성의 시작 : KFTC Tech Day의 문을 열며</span>
+                        <div class="speaker">IT본부장 이송원</div>
+                        <div class="tags-container">
+                            <span class="tags tag-violet">KEYNOTE</span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="session">
+                        <span class="session-number">키노트 2</span>
+                        <span class="session-title">데이터 한 스푼, DX 두 스푼으로 업무수행 방식 업그레이드</span>
+                        <div class="speaker">플랫폼개발부장 성재경</div>
+                        <div class="tags-container">
+                            <span class="tags tag-violet">KEYNOTE</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- 세션 1 -->
+                <div class="schedule-item">
+                    <div class="time">10:00 - 10:40</div>
+                    <div class="session">
+                        <span class="session-number">세션 1</span>
+                        <span class="session-title">KFTC 개발자 경험과 문화 톺아보기</span>
+                        <div class="speaker">IT플랫폼기획팀 팀장 김순일, 대리 유대열, 계장 강미주</div>
+                        <div class="tags-container">
+                            <span class="tags tag-orange">DEX</span>
+                            <span class="tags tag-teal">PLATFORM ENGINEERING</span>
+                            <span class="tags tag-red">DEVREL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세션 2 -->
+                <div class="schedule-item multi-session">
+                    <div class="time">10:50 - 11:30</div>
+                    <div class="session">
+                        <span class="session-number">세션 2A</span>
+                        <span class="session-title">차세대 IT아키텍처 전환 사례 : 금융공동망 업무 시스템 재구축</span>
+                        <div class="speaker">금융공동망재구축반 팀장 박정현</div>
+                        <div class="tags-container">
+                            <span class="tags tag-blue">DEV</span>
+                            <span class="tags tag-purple">LESSON LEARNED</span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="session">
+                        <span class="session-number">세션 2B</span>
+                        <span class="session-title">컨테이너 플랫폼에서의 양방향 TCP 서비스 구현</span>
+                        <div class="speaker">신기술인프라반 과장 이준희</div>
+                        <div class="tags-container">
+                            <span class="tags tag-green">DEVOPS</span>
+                            <span class="tags tag-purple">LESSON LEARNED</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- 점심 시간 -->
+                <div class="schedule-item break">
+                    <div class="time">11:30 - 13:20</div>
+                    <div class="session">
+                        <div class="session-title">Lunch Break</div>
+                    </div>
+                </div>
+        
+                <!-- 세션 3 -->
+                <div class="schedule-item multi-session">
+                    <div class="time">13:20 - 14:00</div>
+                    <div class="session">
+                        <span class="session-number">세션 3A</span>
+                        <span class="session-title">Unbreakable Authentication : 개발자가 반드시 알아야 할 취약점 Top 3</span>
+                        <div class="speaker">정보보호분석평가팀 부부장 박정원</div>
+                        <div class="tags-container">
+                            <span class="tags tag-blue">DEV</span>
+                            <span class="tags tag-brown">SECURITY</span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="session">
+                        <span class="session-number">세션 3B</span>
+                        <span class="session-title">Observability 확보 사례 : 외서연, 너의 모든 것이 궁금해</span>
+                        <div class="speaker">IT플랫폼개발팀 과장 정상헌</div>
+                        <div class="tags-container">
+                            <span class="tags tag-green">DEVOPS</span>
+                            <span class="tags tag-purple">LESSON LEARNED</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세션 4 -->
+                <div class="schedule-item">
+                    <div class="time">14:10 - 14:50</div>
+                    <div class="session">
+                        <span class="session-number">세션 4</span>
+                        <span class="session-title">시스템 장애, 다른 시선으로 접근해보기 (패널토론)</span>
+                        <div class="speaker">IT기획팀 과장 최충배, IT플랫폼기획팀 부부장 윤상문, 결제개발팀 부부장 유광열, 통합관제기획팀 차장 정승훈 (사회: IT플랫폼기획팀장 김순일)</div>
+                        <div class="tags-container">
+                            <span class="tags tag-orange">DEX</span>
+                            <span class="tags tag-green">DEVOPS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 점심 시간 -->
+                <div class="schedule-item break">
+                    <div class="time">14:50 - 15:10</div>
+                    <div class="session">
+                        <div class="session-title">Coffee Break</div>
+                    </div>
+                </div>
+        
+                <!-- 세션 5 -->
+                <div class="schedule-item">
+                    <div class="time">15:10 - 15:50</div>
+                    <div class="session">
+                        <span class="session-number">세션 5</span>
+                        <span class="session-title">우리는 이렇게 하고 있어요 (카카오뱅크의 DevRel, 개발자 경험/문화)</span>
+                        <div class="speaker">카카오뱅크 기술XR팀 Celina</div>
+                        <div class="tags-container">
+                            <span class="tags tag-orange">DEX</span>
+                            <span class="tags tag-red">DEVREl</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 세션 6 -->
+                <div class="schedule-item multi-session">
+                    <div class="time">16:00 - 16:40</div>
+                    <div class="session">
+                        <span class="session-number">세션 6A</span>
+                        <span class="session-title">오픈 프로그래밍으로 봇 개발하기 (Alfred, 네트워크팀 봇, 로사 금결이)</span>
+                        <div class="speaker">IT플랫폼기획팀 부부장 윤상문, 네트워크팀 부부장 유종선, IT협업팀 과장 홍광의</div>
+                        <div class="tags-container">
+                            <span class="tags tag-blue">DEV</span>
+                            <span class="tags tag-orange">DEX</span>
+                            <span class="tags tag-purple">LESSON LEARNED</span>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="session">
+                        <span class="session-number">세션 6B</span>
+                        <span class="session-title">IT 101 프로젝트 재조명 ('23. KFTC-114, '24. 업무 일시중단 관리 플랫폼)</span>
+                        <div class="speaker">시스템지원팀 계장 서지원, 정보개발팀 계장 문봉오</div>
+                        <div class="tags-container">
+                            <span class="tags tag-blue">DEV</span>
+                            <span class="tags tag-purple">LESSON LEARNED</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- 폐막 및 경품추첨 -->
+                <div class="schedule-item break">
+                    <div class="time">16:40 - 17:00</div>
+                    <div class="session">
+                        <div class="session-title">폐막, 경품추첨 및 기념촬영</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="footer">
+        <p class="sub-slogan">DevRel, 개발자 경험/문화와 차세대 기술을 협업으로 혁신하다.</p>
+    </footer>
 </body>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const heroContent = document.querySelector('.hero-content');
-        
-        document.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const { innerWidth, innerHeight } = window;
-            
-            const xRotation = (clientY - innerHeight / 2) / 30;
-            const yRotation = (clientX - innerWidth / 2) / -30;
-            
-            heroContent.style.transform = `
-                rotateX(${xRotation}deg)
-                rotateY(${yRotation}deg)
-            `;
-        });
-
-        // 스케줄 아이템 클릭 효과
+        // 스케줄 아이템 터치 효과
         const scheduleItems = document.querySelectorAll('.schedule-item');
+        
         scheduleItems.forEach(item => {
-            item.addEventListener('click', () => {
-                item.style.transform = 'scale(1.02)';
-                setTimeout(() => {
-                    item.style.transform = 'translateX(10px)';
-                }, 200);
+            item.addEventListener('touchstart', () => {
+                item.style.transform = 'scale(0.98)';
+            });
+            
+            item.addEventListener('touchend', () => {
+                item.style.transform = 'scale(1)';
             });
         });
 
         // 스크롤 애니메이션
         const scheduleSection = document.querySelector('.schedule');
-        window.addEventListener('scroll', () => {
-            const sectionPosition = scheduleSection.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
 
-            if(sectionPosition < screenPosition) {
-                scheduleSection.style.opacity = '1';
-                scheduleSection.style.transform = 'translateY(0)';
-            }
-        });
+        observer.observe(scheduleSection);
     });
 </script>
 </html>
